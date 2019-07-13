@@ -14,10 +14,12 @@
 <script  type="text/babel">/*使用babel编译器  */
 //1. 定义组件
 //方法1 工厂函数组件(适用于简单的组件）
+//
 function MyComponent() {
     return <h2>方法1 工厂函数组件(适用于简单的组件）</h2>
 }
 //方法2 React ES6类组件 (适用于复杂组件）
+//只要有状态state变化，就要用方法2
 class MyComponent2 extends React.Component{
     render() {
         console.log(this)

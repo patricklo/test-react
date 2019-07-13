@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Refs 组件 </h1>
+
+<div id="test3"></div>
+<script src="../../js/react.development.js" type="text/javascript"></script>
+<script src="../../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../../js/babel.min.js" type="text/javascript"></script>
+<script src="../../js/prop-types.js" type="text/javascript"></script>
+<script  type="text/babel">/*使用babel编译器  */
+/*
+需求：
+1.点击按钮 提示第一个输入框的值
+2. 当第二个输入框失焦时 提示这个输入框的值
+ */
+
+
+//1. 定义组件
+class MyRefs extends React.Component{
+    constructor(props){
+        super(props)
+        this.showInput = this.showInput.bind(this)
+        this.showInputOldWay = this.showInputOldWay.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
+
+    }
+    showInput(){
+        const input = this.refs.firstContent
+        alert(input.value)
+    }
+
+    showInputOldWay(){
+        alert(this.inputOld.value)
+    }
+
+    handleBlur(event){
+alert(event.target.value)
+    }
+    render(){
+        return (
+            <div>
+                新方法
+                <input type="text" ref="firstContent"/>
+                <button onClick={this.showInput}>提示输入</button>
+
+                旧方法
+                <input type="text" ref={(input) => this.inputOld=input} />
+                <button onClick={this.showInputOldWay}>旧方法提示</button>
+
+                <input type="text" placeholder="失去焦点提示内容" onBlur={this.handleBlur}/>
+            </div>
+        )
+    }
+}
+
+
+ReactDOM.render(<MyRefs/>,document.getElementById('test3'))
+
+</script>
+</body>
+</html>

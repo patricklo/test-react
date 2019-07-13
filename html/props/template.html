@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Props 组件 </h1>
+<div id="test2"></div>
+
+<div id="test3"></div>
+<script src="../../js/react.development.js" type="text/javascript"></script>
+<script src="../../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../../js/babel.min.js" type="text/javascript"></script>
+<script src="../../js/prop-types.js" type="text/javascript"></script>
+<script  type="text/babel">/*使用babel编译器  */
+/*
+需求： 自定义用来显示一个人员信息的组件，说明：
+1） 如果性别没有指定，则默认为男
+2） 如果年龄没有指定 则默认为18
+ */
+
+
+//1. 定义组件
+//Props - 非组件内状态，而是属性值，可以传递给其它组件；或者用于其它组件(如输入框)传递过来
+//方法1 简单工厂模式组件 (适用于简单组件）
+function Person(props) {
+    return (
+        <ul>
+            <li>姓名：{props.name}</li>
+            <li>年龄：{props.age}</li>
+            <li>性别：{props.sex}</li>
+        </ul>
+    )
+}
+
+//可以设置属性的值类型和必要性
+//引用额外prop-types.js包
+Person.propTypes = {
+    name: PropTypes.string.isRequired,
+    age:PropTypes.number,
+    sex:PropTypes.string
+}
+
+//可以指定 Props的默认值,当值没有给时，会显示默认值
+Person.defaultProps = {
+    age:18,
+    sex:'男'
+}
+var vDOM = <h1>hello react</h1>  //jsx语法
+//2. 将组件渲染到页面
+
+const p1 ={
+    name:'TOME',
+    age:23,
+    sex:'女'
+}
+//1: 复杂写法
+//ReactDOM.render(<Person name={p1.name} age={p1.age} sex={p1.sex}/>,document.getElementById('test2'))
+//2. 省略写法
+// ...p1 两大功能
+// 1. 打包 -》
+//function fn(...as) {}  fn(1,2,3)  打包
+// 2. 解包
+// const arr1 = [1,2,3]
+// const arr2=[6,...arr1,9]  解包
+ReactDOM.render(<Person {...p1}/>,document.getElementById('test2'))
+    const p2 = {
+    name:'Patrick'
+    }
+ReactDOM.render(<Person name={p2.name} age={20}/>,document.getElementById('test3'))
+
+</script>
+</body>
+</html>
