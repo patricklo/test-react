@@ -22,10 +22,11 @@ class MyState_Like  extends React.Component{
             isLike: false
         }
 
+        //方法1
         this.handleClick = this.handleClick.bind(this)
     }
     //新增加自定义方法，内部的this对象黑夜不是组件对象，而是Undefined
-    //如需指定 为组件对象，则使用bind关键字(如上)
+    //如需指定 为组件对象，则使用bind关键字(如上：方法1)
     handleClick(){
         //下面的this会报错，因其拿不到组件对象MyState_Like
         //因为handleClick是新加自定义的方法，
@@ -43,6 +44,7 @@ class MyState_Like  extends React.Component{
         //同上意思 一样效果
         const {isLike} = this.state
         //下面this为组件对象，即组件对象MyState_Like中的handleClick方法
+
         return <h2 onClick={this.handleClick}>{isLike?'你喜欢我':'你不喜欢我'}</h2>
     }
 }
