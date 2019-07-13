@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>动态展示列表数据 map方法</h1>
+<div id="test"></div>
+<script src="../js/react.development.js" type="text/javascript"></script>
+<script src="../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../js/babel.min.js" type="text/javascript"></script>
+<script type="text/babel">/*使用babel编译器  */
+//1. 创建虚拟DOM元素对象
+const names = ['jquery','zeptoo','angular','react', 'vue']
+//如何迭代数组？
+var vDOM1 = (<ul>
+    {
+        names.map((name, index) => <li key={index}>{name}</li>)
+    }
+</ul>)
+//2. 将DOM渲染到页面
+ReactDOM.render(vDOM1, document.getElementById('test'))
+</script>
+</body>
+</html>
