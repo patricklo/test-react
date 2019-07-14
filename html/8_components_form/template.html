@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> 组件 表单组件获取值 </h1>
+
+<div id="test3"></div>
+<script src="../../js/react.development.js" type="text/javascript"></script>
+<script src="../../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../../js/babel.min.js" type="text/javascript"></script>
+<script src="../../js/prop-types.js" type="text/javascript"></script>
+<script  type="text/babel">/*使用babel编译器  */
+/*
+需求：
+1.自定义登录表单
+2. 输入用户名密码后，点击登陆提示输入信息
+3. 不提交表单
+ */
+
+//1.拆分组件
+// 组件1：外面最大组件，用于放置组件2和3，+ 一个标题， 通常叫App
+//组件2： 输入框 叫 Add
+//组件3：显示框 叫 List
+
+
+/**
+ *
+ * 组件化编写功能的流程：
+ * 1. 拆分组件 定义出app
+ * 2. 先实现静态组件 无动态数据和交互
+ * 3. 实现动态组件
+ *   3.1 实现初始化数据显示，并决定数据放在哪个组件
+ *   3.2 实现交互功能
+ */
+
+//1. 定义组件1
+class LoginForm extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.state = {
+            pwd:''
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(event){
+        //读取当前pwd状态
+        const pwd = event.target.value
+        //更新pwd
+        this.setState({pwd})
+    }
+
+    handleSubmit(event){
+        //获取表单值 - 方法1
+        //非受控组件 - 需要时才手动读取表单输入框中的数据
+        const name = this.nameInput.value
+        //获取表单数据 - 方法2
+        //受控组件 - 表单项输入数据能自动收集状态
+        const {pwd} = this.state
+        alert(`准备提交的用户史为${name},密码为${pwd}`)
+
+
+
+        //阻止事件的默认行为 -> 表单提交
+        event.preventDefault()
+    }
+
+    render(){
+        return (
+            <form action="/test">
+                username：<input type="text" ref={input => this.nameInput = input}></input>
+                password: <input type="password" value={this.state.pwd} onChange={this.handleChange}></input>
+                <input type="submit" value="登录" onClick={this.handleSubmit}/>
+            </form>
+        )
+    }
+}
+
+ReactDOM.render(<LoginForm />,document.getElementById('test3'))
+
+</script>
+</body>
+</html>
