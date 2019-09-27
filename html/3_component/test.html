@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>组件化编码 </h1>
+<div id="test"></div>
+<div id="test2"></div>
+<script src="../../js/react.development.js" type="text/javascript"></script>
+<script src="../../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../../js/babel.min.js" type="text/javascript"></script>
+<script type="text/babel">/*使用babel编译器  */
+    //1. 定义组件
+    //方法1 工厂函数组件(适用于简单的组件）
+    function MyComponent() {
+        return <h2>工厂函数组件(适用于简单的组件）</h2>
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById('test'))
+    //方法2 React ES6类组件 (适用于复杂组件）
+    //只要有状态state变化，就要用方法2
+    class MyComponent2 extends React.Component{
+        render(){
+            console.log(this)
+            return <h1>React ES6类组件 (适用于复杂组件）</h1>
+        }
+    }
+
+    ReactDOM.render(<MyComponent2/>,document.getElementById('test2'))
+
+
+</script>
+</body>
+</html>

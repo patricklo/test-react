@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> State </title>
+</head>
+<body>
+<div id="test"></div>
+<script src="../../js/react.development.js" type="text/javascript"></script>
+<script src="../../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../../js/babel.min.js" type="text/javascript"></script>
+
+<script type="text/babel">
+    /*
+    state 是组件对象最重要的属性，值是对象（可以包含多个数据）
+    state 存储状态类型的值，多用于组件内部 ，而Prop传递值 到其它组件
+     */
+    class LikeComponent extends React.Component{
+        constructor(props){
+            super(props)
+            //定义 state
+            this.state = {
+                isLike: false
+            }
+
+            //将新加方法绑定this为当前组件对象
+            this.handleClick = this.handleClick.bind(this)
+        }
+        render(){
+            //读取状态
+            //const isLike = this.state.isLike
+            const {isLike} = this.state
+            return <h2 onClick={this.handleClick}>{isLike?'like':'unlike'}</h2>
+        }
+
+
+        //组件新加的方法，
+        handleClick(){
+            const isLike = !this.state.isLike
+            //更新状态
+            this.setState({isLike})
+        }
+    }
+
+    ReactDOM.render(<LikeComponent/>, document.getElementById('test'))
+</script>
+</body>
+</html>
